@@ -5,8 +5,10 @@
 
   const SINAIS = [
     { t: 'Friends got messages from your account that you never sent.', s: true, ic: 'email' },
-    { t: 'Your game updated itself, as the app said it would.', s: false, ic: 'gamepad' },
+    { t: 'You got a "new sign-in" email right after you signed in on a new Chromebook yourself.', s: false, ic: 'escudo' },
     { t: 'A sign-in code arrived by SMS, but you did not try to sign in.', s: true, ic: 'celular' },
+    { t: 'Your account liked 30 posts from strangers at 3 am while you were asleep.', s: true, ic: 'camera' },
+    { t: 'Your game asked you to sign in again after a big update.', s: false, ic: 'gamepad' },
     { t: 'Your password suddenly stopped working.', s: true, ic: 'chave' },
     { t: 'A reminder popped up for homework you put in your Tracker.', s: false, ic: 'calendario' },
     { t: 'An app you do not remember installing appeared on your phone.', s: true, ic: 'alerta' }
@@ -19,7 +21,7 @@
   ];
 
   M.registrar({
-    ordem: 9, id: 'incidente', hora: '17:30', titulo: 'Something is wrong', tema: 'Getting help', icone: 'alerta', max: 45,
+    ordem: 9, id: 'incidente', hora: '17:30', titulo: 'Something is wrong', tema: 'Getting help', icone: 'alerta', max: 55,
     missao: 'At home, a few strange things have happened today. <strong>Sort the warning signs from the normal stuff</strong>, then show you know what to do.',
     como: [
       ['clique', 'Tick the cards that are signs someone else may be in your account or device.'],

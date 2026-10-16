@@ -57,7 +57,8 @@
     chama: '<path fill="currentColor" stroke="none" d="M12 2c1 4 5 5.5 5 11a5 5 0 0 1-10 0c0-2.5 1.2-4 2.5-5 .2 2 1 3 2 3.5C11 9 11 5 12 2z"/>',
     play: '<path fill="currentColor" stroke="none" d="M7 4v16l13-8z"/>',
     gamepad: '<path d="M6 9h12a4 4 0 0 1 4 4v1a3 3 0 0 1-5.5 1.7L15 14H9l-1.5 1.7A3 3 0 0 1 2 14v-1a4 4 0 0 1 4-4z"/><path d="M7 11v3M5.5 12.5h3M16 12h.01M18 13.5h.01"/>',
-    casa: '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/>'
+    casa: '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/>',
+    menu: '<path d="M4 6h16M4 12h16M4 18h16"/>'
   };
 
   function ico(nome, cls) {
@@ -144,8 +145,8 @@
     s.push('<g data-alvo="tela" tabindex="0" role="button" aria-label="Laptop screen">' + contorno(322, 170, 300, 236) +
       '<path d="M446 340h40l8 50h-56z" fill="#5b6660"/><ellipse cx="466" cy="392" rx="54" ry="8" fill="#4a524d"/>' +
       '<rect x="330" y="178" width="284" height="172" rx="10" fill="#2b2f2d"/><rect x="341" y="189" width="262" height="146" fill="#fff"/>' +
-      '<rect x="341" y="189" width="262" height="18" fill="#2e75c7"/>' + texto(348, 202, 'School Mail · signed in', 9.5, '#fff', 500) +
-      '<rect x="526" y="192" width="72" height="12" rx="2" fill="#cf4a3c"/>' + texto(535, 201.5, 'SIGNED IN', 7.5, '#fff', 900));
+      '<rect x="341" y="189" width="262" height="18" fill="#2e75c7"/>' + texto(348, 202, 'School Mail · Inbox (12)', 9.5, '#fff', 500) +
+      '');
     for (let r = 0; r < 7; r++) {
       s.push('<rect x="345" y="' + (213 + r * 15) + '" width="150" height="11" fill="' + (r === 0 ? '#e2efdd' : (r % 2 ? '#f6f8f5' : '#fff')) + '" stroke="#e1e6e0" stroke-width=".8"/>');
       if (r) s.push('<rect x="350" y="' + (216 + r * 15) + '" width="' + (36 + (r * 17) % 30) + '" height="5" rx="1" fill="#9aa59d"/><rect x="420" y="' + (216 + r * 15) + '" width="' + (22 + (r * 11) % 20) + '" height="5" rx="1" fill="#3e9b2f"/><rect x="460" y="' + (216 + r * 15) + '" width="26" height="5" rx="1" fill="#c9d1cb"/>');
@@ -167,7 +168,7 @@
       '<rect x="276" y="370" width="48" height="12" rx="3" fill="#3e9b2f"/><rect x="280" y="388" width="30" height="7" rx="3" fill="#e2e8f0"/>' +
       '<rect x="290" y="399" width="30" height="7" rx="3" fill="#c9f0c0"/><rect x="280" y="410" width="34" height="7" rx="3" fill="#e2e8f0"/>' +
       '<rect x="288" y="421" width="32" height="7" rx="3" fill="#c9f0c0"/><rect x="280" y="432" width="26" height="7" rx="3" fill="#e2e8f0"/></g>' +
-      texto(240, 446, 'unlocked', 9, '#cf4a3c', 900) + '</g>');
+      '</g>');
     // garrafa de água (isca)
     s.push('<g data-alvo="garrafa" tabindex="0" role="button" aria-label="Water bottle">' + contorno(272, 318, 70, 78) +
       '<rect x="296" y="322" width="18" height="10" rx="3" fill="#002664"/><path d="M292 334h26v50a6 6 0 0 1-6 6h-14a6 6 0 0 1-6-6z" fill="#7fb6e8"/>' +
@@ -178,7 +179,7 @@
       '<rect x="614" y="418" width="48" height="16" rx="5" fill="#3c6ea8"/><rect x="618" y="421" width="20" height="4" rx="2" fill="#6f97c8"/>' +
       '<rect x="662" y="421" width="18" height="10" fill="#c9d1cb"/><rect x="667" y="424" width="3" height="3" fill="#8a948e"/><rect x="673" y="424" width="3" height="3" fill="#8a948e"/>' +
       '<g transform="rotate(-5 645 397)"><rect x="604" y="383" width="82" height="27" rx="3" fill="#fff" stroke="#cf4a3c" stroke-width="1.5"/>' +
-      texto(610, 394, 'FREE GAMES', 9, '#cf4a3c', 900) + texto(610, 406, 'TAKE ME :)', 10, '#cf4a3c', 900) + '</g></g>');
+      texto(610, 394, 'FREE', 9, '#cf4a3c', 900) + texto(610, 406, 'GAMES', 10, '#cf4a3c', 900) + '</g></g>');
     // cartão de estudante esquecido sobre a mesa (risco)
     s.push('<g data-alvo="cracha" tabindex="0" role="button" aria-label="ID card on the desk">' + contorno(694, 372, 82, 74) +
       '<path d="M716 400 C 698 378 768 372 756 400" stroke="#cf4a3c" stroke-width="3" fill="none"/>' +

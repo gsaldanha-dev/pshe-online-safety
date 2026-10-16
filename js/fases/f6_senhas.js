@@ -5,20 +5,22 @@
 
   // cada rodada: duas opções, a forte é `certa`. f = força (0–100) para o medidor; frase = texto, não senha
   const RODADAS = [
-    { a: { s: 'Nicholas2026', f: 22, v: 'School name + year: one of the first guesses anyone would try.' },
-      b: { s: 'purple-turtle-eats-14-pizzas!', f: 94, v: '29 characters in a silly sentence only you would think of.' }, certa: 'b' },
-    { a: { s: 'Rainy.Kite.Dances.88', f: 86, v: 'A long phrase with nothing personal in it.' },
-      b: { s: 'Neymar10!', f: 16, v: 'Favourite player and shirt number: it is all on your profile.' }, certa: 'a' },
-    { a: { s: 'P@ssw0rd!', f: 30, v: 'Only 9 characters: the symbols do not make up for being short.' },
-      b: { s: 'my-dog-snores-like-a-tractor', f: 95, v: '28 characters: length is what matters most.' }, certa: 'b' },
-    { frase: true, a: { s: 'A different password for each account, kept in a password manager a parent helps you set up', f: 94, v: 'If one site leaks, only one account is at risk.' },
-      b: { s: 'The same strong password for school, games and social media', f: 24, v: 'A password leaked from one game gets tried everywhere else: one leak becomes three.' }, certa: 'a' }
+    { a: { s: 'St.Nicholas#2026!', f: 24, v: 'Looks complex, but it is the school\'s name and the year: one of the first guesses.' },
+      b: { s: 'fourteen quiet umbrellas', f: 90, v: '24 characters of random words: much harder to guess.' }, certa: 'b' },
+    { a: { s: 'x7#Qp!', f: 20, v: 'Random, but only 6 characters: a computer can try every combination very fast.' },
+      b: { s: 'pineapple sandwich at midnight', f: 95, v: '30 characters: length beats symbols.' }, certa: 'b' },
+    { a: { s: 'ladder-mango-cloud-river', f: 90, v: 'Four unrelated words, nothing personal.' },
+      b: { s: 'Tr0ub4dor&3', f: 30, v: 'A real word with letters swapped for numbers. Attackers try these swaps first.' }, certa: 'a' },
+    { frase: true, a: { s: 'Change your password every week: Pass1, Pass2, Pass3...', f: 18, v: 'Once someone knows one, they can guess the next.' },
+      b: { s: 'Keep one strong password per account and turn on 2-step verification', f: 95, v: 'Even if a password leaks, the second step keeps the account closed.' }, certa: 'b' }
   ];
+  // a ordem das opções muda a cada vez: a resposta certa não pode ser sempre a última
+  function embaralhar(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
   const EXPLICA = [
-    'The longer, the safer: use a <b>passphrase</b> of at least 14 characters that only makes sense to you.',
-    'Avoid things people can find out, like birthdays, pets and favourite players: <b>it is all on social media</b>.',
-    '<b>Length beats complexity.</b> Mix letters, numbers and symbols, but start with length.',
-    '<b>Never reuse passwords.</b> A password manager remembers them all, so you only learn one.'
+    'Looking complicated is not the same as being strong. A name and a year are guessed first, symbols or not.',
+    '<b>Length beats complexity.</b> Six random characters fall in seconds; a long phrase holds.',
+    'Swapping letters for numbers (a → 4, o → 0) fools people, not computers. Use unrelated words instead.',
+    '<b>2-step verification</b> is the best upgrade you can make: a stolen password alone is no longer enough.'
   ];
 
   M.registrar({
@@ -92,7 +94,8 @@
         api.teclas(e => { const k = e.key.toLowerCase(); if (k === 'a' || k === 'b') escolher(k); });
       }
 
-      function painel(ctx, ops, no) {
+      function painel(ctx, opsOrig, no) {
+        const ops = embaralhar(opsOrig);
         return new Promise(resolve => {
           const p = document.createElement('div');
           p.className = 'opcoes-cel';

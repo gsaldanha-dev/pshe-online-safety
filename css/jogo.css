@@ -952,3 +952,142 @@ kbd { font-family: var(--tit); font-weight: 900; font-size: 12px; border: 1.5px 
 .ctf-msg.ok { color: var(--ve); background: var(--v50); border-left: 4px solid var(--v); padding: 10px 14px; border-radius: 0 10px 10px 0; }
 .ctf-msg.no { color: #8f2b20; }
 .final .acoes .btn { padding-left: 22px; padding-right: 22px; }
+
+/* ------------------------------------------------------------------ fase 2: e-mail da escola no estilo Gmail */
+.gm { position: absolute; inset: 14px; background: #f6f8fc; border-radius: 14px; overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column; font-family: Roboto, Arial, 'Segoe UI', sans-serif; color: #1f1f1f; }
+.gm-topo { height: 60px; display: flex; align-items: center; gap: 14px; padding: 0 18px; flex: none; }
+.gm-menu svg { width: 22px; height: 22px; color: #444746; }
+.gm-marca { display: flex; align-items: center; gap: 8px; font-size: 21px; color: #444746; width: 170px; }
+.gm-marca svg { width: 26px; height: 26px; color: #c5221f; }
+.gm-busca { flex: 1; max-width: 640px; height: 44px; background: #e9eef6; border-radius: 22px; display: flex; align-items: center; gap: 12px; padding: 0 18px; color: #444746; font-size: 15px; }
+.gm-busca svg { width: 18px; height: 18px; }
+.gm .prog { margin-left: auto; font-size: 13px; background: #e9eef6; padding: 6px 14px; border-radius: 999px; color: #444746; }
+.gm-corpo { flex: 1; display: flex; min-height: 0; padding: 0 14px 14px 0; }
+.gm-pastas { width: 210px; padding: 4px 0 0 8px; flex: none; font-size: 14px; }
+.gm-escrever { display: inline-flex; align-items: center; gap: 12px; background: #c2e7ff; color: #001d35; border-radius: 16px; padding: 16px 22px; font-weight: 500; margin: 0 0 14px 4px; box-shadow: 0 1px 2px rgba(0, 0, 0, .1); }
+.gm-escrever svg { width: 20px; height: 20px; }
+.gm-pastas > div:not(.gm-escrever) { display: flex; align-items: center; gap: 16px; height: 32px; padding: 0 12px 0 16px; border-radius: 0 16px 16px 0; color: #1f1f1f; }
+.gm-pastas > div svg { width: 18px; height: 18px; color: #444746; }
+.gm-pastas .sel { background: #d3e3fd; font-weight: 700; }
+.gm-pastas .nl { margin-left: auto; font-size: 12.5px; }
+.gm-lista, .gm-ler { flex: 1; background: #fff; border-radius: 16px; overflow: auto; min-width: 0; scrollbar-width: thin; }
+.gm-ler { display: none; position: relative; flex-direction: column; overflow: hidden; }
+.gm.lendo .gm-lista { display: none; }
+.gm.lendo .gm-ler { display: flex; }
+.gm-item { display: flex; align-items: center; gap: 14px; height: 48px; padding: 0 18px; border-bottom: 1px solid #f1f3f4; cursor: pointer; font-size: 14px; position: relative; background: #f2f6fc; }
+.gm-item.nlido { background: #fff; }
+.gm-item:hover { box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px rgba(60, 64, 67, .3); z-index: 1; }
+.gm-chk { width: 16px; height: 16px; border: 2px solid #8e918f; border-radius: 2px; flex: none; }
+.gm-de { width: 210px; flex: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gm-item.nlido .gm-de { font-weight: 700; }
+.gm-ass { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #5f6368; }
+.gm-ass b { font-weight: 400; color: #1f1f1f; }
+.gm-item.nlido .gm-ass b { font-weight: 700; }
+.gm-hora { flex: none; font-size: 12.5px; color: #5f6368; margin-right: 26px; }
+.gm-item.nlido .gm-hora { font-weight: 700; color: #1f1f1f; }
+.gm-item .status { position: absolute; right: 12px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; }
+.gm-item .status svg { width: 12px; height: 12px; color: #fff; }
+.gm-item .status.certo { background: var(--v); }
+.gm-item .status.errado { background: var(--verm); }
+.gm-item .status.meio { background: var(--ambar); }
+.gm-barra { display: flex; gap: 10px; padding: 10px 18px; align-items: center; border-bottom: 1px solid #f1f3f4; flex: none; }
+.gm-volta { border: 0; background: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #444746; }
+.gm-volta:hover { background: #f1f3f4; }
+.gm-volta svg { width: 20px; height: 20px; transform: rotate(180deg); }
+.gm-barra .lbl { font-size: 13px; color: #5f6368; margin: 0 4px 0 8px; }
+.gm .btn-ol { font-family: inherit; border-radius: 18px; }
+.gm-msg { flex: 1; overflow: auto; padding: 18px 28px 60px 28px; scrollbar-width: thin; }
+.gm-msg h2 { font-family: inherit; font-weight: 400; font-size: 22px; color: #1f1f1f; margin: 0 0 18px 52px; display: flex; align-items: center; gap: 10px; }
+.gm-tag { font-size: 12px; background: #ddd; border-radius: 4px; padding: 1px 6px; color: #444; }
+.gm-rem { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px; }
+.gm-rem .av { width: 40px; height: 40px; border-radius: 50%; color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 500; flex: none; }
+.gm-rem .nome { font-size: 14px; }
+.gm-rem .end { font-size: 12.5px; color: #5f6368; }
+.gm-rem .para { font-size: 12.5px; color: #5f6368; }
+.gm-rem .hora { margin-left: auto; font-size: 12px; color: #5f6368; }
+.gm-corpo-msg { font-size: 14.5px; line-height: 1.6; color: #222; max-width: 680px; margin-left: 52px; }
+.gm-corpo-msg p { margin: 0 0 12px; }
+.gm-corpo-msg a { color: #0b57d0; text-decoration: underline; cursor: pointer; }
+.gm-cartao { border: 1px solid #dadce0; border-radius: 8px; padding: 22px 26px; text-align: center; max-width: 520px; }
+.gm-cartao-t { font-size: 20px; color: #202124; }
+.gm-cartao .gm-mini { font-size: 12.5px; color: #5f6368; }
+.gm-corpo-msg .gm-botao { display: inline-block; background: #0b57d0; color: #fff; text-decoration: none; padding: 9px 24px; border-radius: 20px; font-weight: 500; margin: 4px 0; }
+.mostra-sinais .gm-botao[data-s] { background: #0b57d0; box-shadow: 0 0 0 4px #ffc72c; }
+.gm-arquivo { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #dadce0; border-radius: 8px; padding: 10px 14px; margin: 8px 0 12px; font-size: 14px; }
+.gm-xls { background: #188038; color: #fff; font-size: 10px; font-weight: 700; border-radius: 3px; padding: 3px 5px; }
+.gm .veredito { margin: 0 18px; }
+
+/* ------------------------------------------------------------------ fase 3: chat no estilo WhatsApp (tema claro) */
+.tm.wa { --teams: #008069; background: #fff; font-family: 'Segoe UI', Helvetica, Arial, sans-serif; }
+.wa .tm-trilho { background: #f0f2f5; border-right: 1px solid #e9edef; width: 84px; }
+.wa .tm-trilho div { color: #54656f; width: 70px; }
+.wa .tm-trilho div.sel { color: #111b21; background: #d9dbdf; }
+.wa .tm-chats { background: #fff; border-right: 1px solid #e9edef; width: 330px; }
+.wa .tm-chats .cab { font-size: 22px; color: #111b21; padding: 16px 18px 10px; }
+.wa-busca { margin: 0 12px 8px; background: #f0f2f5; border-radius: 8px; height: 36px; display: flex; align-items: center; gap: 12px; padding: 0 14px; font-size: 14px; color: #667781; }
+.wa-busca svg { width: 16px; height: 16px; }
+.wa .tm-chat-item { padding: 10px 14px; border-bottom: 1px solid #f0f2f5; font-size: 13.5px; }
+.wa .tm-chat-item.sel { background: #f0f2f5; box-shadow: none; }
+.wa .tm-chat-item .av { width: 46px; height: 46px; font-size: 14px; }
+.wa .tm-chat-item .av::after { display: none; }
+.wa .tm-chat-item b { font-weight: 400; font-size: 15.5px; color: #111b21; }
+.wa .tm-chat-item small { color: #667781; font-size: 13.5px; max-width: 190px; }
+.wa-h { margin-left: auto; align-self: flex-start; font-style: normal; font-size: 12px; color: #667781; margin-top: 4px; }
+.wa .tm-chat-item.novo .wa-h { color: #1fa855; }
+.wa .tm-principal { background: #efeae2; background-image: radial-gradient(rgba(0, 0, 0, .035) 1px, transparent 1px); background-size: 18px 18px; }
+.wa .tm-cab { background: #f0f2f5; border-bottom: 1px solid #e9edef; height: 60px; }
+.wa .tm-cab .av { background: #8b6f5c; width: 40px; height: 40px; }
+.wa .tm-cab .nome { font-weight: 400; font-size: 16px; color: #111b21; display: flex; flex-direction: column; line-height: 1.2; }
+.wa .tm-cab .nome small { font-size: 12.5px; color: #667781; }
+.wa .tm-cab .acoes-cab { gap: 18px; color: #54656f; }
+.wa .tm-msgs { padding: 18px 60px 10px; gap: 4px; }
+.wa .bolha { border-radius: 8px; padding: 6px 9px 8px; font-size: 14.2px; color: #111b21; box-shadow: 0 1px .5px rgba(11, 20, 26, .13); position: relative; max-width: 62%; }
+.wa .bolha.ele { background: #fff; border-top-left-radius: 0; }
+.wa .bolha.eu { background: #d9fdd3; border-top-right-radius: 0; }
+.wa .bolha.sistema { background: #fff; color: #54656f; font-size: 12.5px; box-shadow: 0 1px .5px rgba(11, 20, 26, .13); border-radius: 8px; padding: 5px 12px; margin: 6px 0; }
+.wa-hb { float: right; font-size: 11px; color: #667781; margin: 8px 0 -4px 10px; }
+.wa .digitando { background: #fff; border-radius: 8px; }
+.wa .tm-pedido { background: #fff; border: 0; border-radius: 10px; box-shadow: 0 1px 3px rgba(11, 20, 26, .15); width: 460px; }
+.wa .tm-pedido .av { background: #8b6f5c; }
+.wa .tm-pedido .nome { font-weight: 400; font-size: 18px; color: #111b21; }
+.wa-push { font-size: 13.5px; color: #667781; margin-top: 2px; }
+.wa .tm-pedido p { color: #667781; }
+.wa .tm-pedido .prev { background: #f0f2f5; }
+.wa .tm-perfil { background: #fff8e5; border-color: #f2dfa7; }
+.wa .tm-opcoes { background: #f0f2f5; border-top: 1px solid #e9edef; }
+.wa .opcao { border-color: #d1d7db; border-radius: 10px; }
+.wa .opcao:hover { border-color: #008069; background: #f0fdf4; }
+.wa .opcao .tecla { background: #e7fce3; color: #008069; }
+.wa .toast-teams { border-left-color: #25d366; }
+.wa .chamada { background: radial-gradient(circle at 50% 35%, #2a3942, #111b21); }
+
+/* ------------------------------------------------------------------ fase 8: "novo post" no estilo Instagram */
+.post.ig { left: 20px; width: 920px; border-radius: 14px; font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #000; }
+.ig-topo { height: 44px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #dbdbdb; position: relative; flex: none; font-size: 16px; }
+.ig-volta { position: absolute; left: 14px; top: 11px; }
+.ig-volta svg { width: 22px; height: 22px; transform: rotate(180deg); }
+.ig-share { position: absolute; right: 16px; top: 12px; color: #0095f6; font-weight: 600; font-size: 14.5px; }
+.ig-corpo { flex: 1; display: flex; min-height: 0; }
+.post.ig .foto { flex: 1; background: #1c1c1c; position: relative; }
+.post.ig .foto svg { position: absolute; left: 0; right: 0; top: 50%; bottom: auto; height: auto; width: 100%; transform: translateY(-50%); aspect-ratio: 880 / 400; }
+.ig-lado { width: 310px; flex: none; border-left: 1px solid #dbdbdb; display: flex; flex-direction: column; overflow: auto; scrollbar-width: thin; }
+.ig-user { display: flex; align-items: center; gap: 10px; padding: 16px 16px 8px; font-size: 14px; }
+.ig-user .av { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(45deg, #f9ce34, #ee2a7b, #6228d7); color: #fff; display: grid; place-items: center; font-size: 11px; font-weight: 700; }
+.ig-user b { font-weight: 600; }
+.post.ig .ig-legenda { padding: 4px 16px 6px; font-size: 14px; line-height: 1.55; min-height: 120px; }
+.ig-conta { text-align: right; font-size: 12px; color: #737373; padding: 0 16px 10px; border-bottom: 1px solid #efefef; }
+.post.ig .ig-campo { padding: 12px 16px; border-bottom: 1px solid #efefef; font-size: 14px; display: flex; flex-direction: column; gap: 4px; line-height: 1.4; }
+.ig-campo > span:first-child { color: #000; font-weight: 500; }
+.ig-campo [data-alvo] { color: #737373; align-self: flex-start; }
+.ig-aud { color: #737373; display: flex; align-items: center; gap: 6px; }
+.ig-aud svg { width: 15px; height: 15px; }
+/* fase 9 com oito sinais: quatro colunas para caber acima do botão */
+.sinais { grid-template-columns: repeat(4, 1fr); gap: 14px; left: 50px; right: 50px; }
+.sinal { min-height: 150px; padding: 16px; }
+.sinal .t { font-size: 14.5px; }
+/* fase 7 com seis endereços: linhas mais baixas para caber com as explicações abertas */
+.urls { top: 92px; gap: 8px; }
+.url-linha { padding: 7px 12px 7px 16px; gap: 6px 14px; }
+.url-linha .barra-url { padding: 7px 16px; font-size: 16px; }
+.url-linha .expl { font-size: 12.5px; }
+.f7 .conferir { bottom: 18px; }

@@ -4,26 +4,30 @@
   const ico = (n) => ARTE.ico(n);
 
   const CARTAS = [
-    { tag: 'Explain', ic: 'robo', t: 'Ask an AI to explain photosynthesis more simply, then check it in your textbook', pode: true,
-      ex: 'Using AI to understand, then checking the source: a good use.' },
-    { tag: 'Privacy', ic: 'usuario', t: 'Paste a classmate\'s full name, photo and address into an AI to write a funny story', pode: false,
-      ex: 'That is someone else\'s personal information. What you paste into an AI can be stored and seen by others.' },
-    { tag: 'New app', ic: 'email', t: 'Sign up to a new AI app with your school email because an ad promised free coins', pode: false,
-      ex: 'Ads that promise prizes are a common trap. Ask an adult before signing up to anything new.' },
+    { tag: 'Checking', ic: 'nota', t: 'Ask AI to point out grammar mistakes in your own essay, when your teacher allows it, and say you used it', pode: true,
+      ex: 'Your work, your teacher\'s rules, and you are honest about it: fine.' },
+    { tag: 'Photos', ic: 'pessoas', t: 'Upload a photo of your whole class to an AI app that "makes everyone look older"', pode: false,
+      ex: 'Your classmates did not agree to their faces going into an app, and the app may keep the photos.' },
+    { tag: 'Games', ic: 'gamepad', t: 'A friendly AI character in a game asks your age and school "to make the game better for you"', pode: false,
+      ex: 'Personal details do not become safe because a chatbot asks nicely. Skip the question.' },
+    { tag: 'Help', ic: 'reportar', t: 'Ask AI how to report a fake account that is pretending to be you', pode: true,
+      ex: 'Using AI to find out how to get help is a good use. Then tell an adult too.' },
+    { tag: 'Voices', ic: 'som', t: 'Use an AI voice of a teacher to send a "funny" audio message to the class', pode: false,
+      ex: 'Copying a real person\'s voice is impersonation. It can hurt them and get you into serious trouble.' },
+    { tag: 'Facts', ic: 'lupa', t: 'Use a statistic the AI gave you in your project because it sounded very precise', pode: false,
+      ex: 'AI can invent numbers that sound exact. Check them in a reliable source before you use them.' },
     { tag: 'Ideas', ic: 'lampada', t: 'Ask AI for poster ideas when your teacher says AI is allowed, then make your own', pode: true,
       ex: 'Allowed by the teacher, and the final work is yours: fine.' },
-    { tag: 'Homework', ic: 'nota', t: 'Hand in an essay the AI wrote for you as if it were your own work', pode: false,
-      ex: 'Handing in someone else\'s work as yours is cheating, and that includes work by an AI. Follow your teacher\'s rules on AI.' },
-    { tag: 'Images', ic: 'camera', t: 'Make an AI picture of a classmate doing something embarrassing and share it in the group chat', pode: false,
-      ex: 'A fake image of a real person is bullying, even "as a joke", and it can be against the law. Never make or share one.' },
-    { tag: 'Checking', ic: 'lupa', t: 'Check a fact the AI gave you in a reliable source before using it in a project', pode: true,
-      ex: 'Exactly: AI can be wrong while sounding very sure.' },
-    { tag: 'Secrets', ic: 'chave', t: 'Tell a friendly chatbot your password so it can "remember it for you"', pode: false,
-      ex: 'Never give a password to a chatbot, however friendly it seems.' }
+    { tag: 'Feelings', ic: 'chat', t: 'Tell only an AI chatbot about something online that is really worrying you, and nobody else', pode: false,
+      ex: 'A chatbot cannot keep you safe or act for you. Something worrying needs a trusted adult: family, your form tutor or the counsellor.' },
+    { tag: 'Privacy', ic: 'usuario', t: 'Paste a friend\'s private messages into an AI to ask what they "really meant"', pode: false,
+      ex: 'Those messages were written for you, not for an app. Ask your friend instead.' },
+    { tag: 'Learning', ic: 'robo', t: 'Ask AI to quiz you on your History notes before a test', pode: true,
+      ex: 'Using AI to practise what you learned is a smart way to revise.' }
   ];
 
   M.registrar({
-    ordem: 5, id: 'ia', hora: '13:15', titulo: 'AI: OK or not OK?', tema: 'Using AI safely', icone: 'robo', max: 80,
+    ordem: 5, id: 'ia', hora: '13:15', titulo: 'AI: OK or not OK?', tema: 'Using AI safely', icone: 'robo', max: 100,
     missao: 'After lunch, your group wants to use AI for a project. <strong>Decide quickly</strong> what is OK and what is not.',
     como: [
       ['arrastar', 'Drag the card <b>right</b> (OK) or <b>left</b> (not OK).'],
@@ -35,7 +39,7 @@
       '<b>Not OK</b>: pasting anyone\'s personal information or passwords, handing in AI work as yours, or making fake images of real people.',
       '<b>If in doubt</b>: ask your teacher before using AI for schoolwork. And check: AI is often wrong while sounding sure.'
     ],
-    conquista: { id: 'iaconsciente', nome: 'AI aware', desc: 'Got all 8 AI cards right', icone: 'robo' },
+    conquista: { id: 'iaconsciente', nome: 'AI aware', desc: 'Got all 10 AI cards right', icone: 'robo' },
 
     iniciar(api) {
       let i = 0, ocupado = false;

@@ -5,7 +5,8 @@
 (function () {
   'use strict';
   const NS = 'http://www.w3.org/2000/svg';
-  const PTS = 10, PEN = 2, DICA_MS = 20000;
+  // 3 pontos por isca e dica só depois de 40 s: com 2 e 20 s, clicar em tudo e esperar a dica ainda compensava
+  const PTS = 10, PEN = 3, DICA_MS = 40000;
 
   M.caca = function (api, o) {
     return new Promise(res => {

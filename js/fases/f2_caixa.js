@@ -1,4 +1,6 @@
-/* Fase 2 — 09:00 · Caixa de entrada (phishing escrito por IA, para alunos: prêmio, falso professor, conta encerrada) */
+/* Fase 2 — 09:00 · Caixa de entrada no estilo do e-mail da escola (que é Gmail): oito e-mails, quatro golpes.
+   Os pares são de propósito parecidos — alerta do Google verdadeiro x falso, aviso do ManageBac verdadeiro x
+   compartilhamento falso do Drive — para que o aluno decida pelo domínio e pelo pedido, não pela aparência. */
 (function () {
   'use strict';
   const ico = (n) => ARTE.ico(n);
@@ -6,56 +8,76 @@
   // golpe: true = phishing. sEnd: número do sinal que marca o endereço. Os <span data-s="n"> do corpo casam com sinais[n-1].
   const EMAILS = [
     {
-      id: 'robux', golpe: true, de: 'Game Rewards', end: 'rewards@free-game-gifts.net', sEnd: 4, cor: '#8a948e', hora: '09:34',
-      assunto: 'You won 10,000 free coins! Claim today', previa: 'Congratulations! Your account was chosen for 10,000 free coins...',
-      corpo: '<p>Congratulations, player!</p><p>Your account was chosen for <b>10,000 free coins</b>. <span data-s="2">The offer ends at midnight today.</span></p>' +
-        '<p><span data-s="3">Just sign in with your game username and password</span> on the button below and the coins are yours.</p>' +
-        '<p><a class="botao-email" data-s="1" data-href="https://free-game-gifts.net/claim/login">Claim my coins</a></p><p>The Rewards Team</p>',
-      sinais: ['Hover over the button: it leads to <b>free-game-gifts.net</b>, not to the game.',
-        'A deadline of "today" so you do not stop to think.',
-        'It asks for your username and password. Real games never ask for your password by email.',
-        'A sender you have never heard of, from a domain that belongs to no game.'],
-      licao: 'Free coins that need your password are the price of your account.'
+      id: 'alerta-falso', golpe: true, de: 'Google', end: 'no-reply@accounts-google-security.com', sEnd: 1, cor: '#1a73e8', hora: '09:41',
+      assunto: 'Security alert: new sign-in on Windows', previa: 'Your school account was just used to sign in on a new Windows device...',
+      corpo: '<div class="gm-cartao"><p class="gm-cartao-t">A new sign-in on Windows</p><p>you@stnicholas.com.br</p>' +
+        '<p>We noticed a new sign-in to your school account on a Windows device. <span data-s="3">If this wasn\'t you, someone might be using your account. Check and secure it now.</span></p>' +
+        '<p><a class="gm-botao" data-s="2" data-href="https://accounts.google.com-review.help/activity">Check activity</a></p></div>',
+      sinais: ['The sender looks like Google, but the domain is <b>accounts-google-security.com</b>, not google.com.',
+        'Hover over the button: it goes to <b>google.com-review.help</b>. The real domain is the part just before the first "/".',
+        'It tries to scare you so you click before you check.'],
+      licao: 'Got a scary alert? Do not use its button. Open your account the way you always do and check from there.'
     },
     {
-      id: 'biblioteca', golpe: false, de: 'Library', end: 'library@stnicholas.com.br', sEnd: 1, cor: '#002664', hora: '09:20',
-      assunto: 'Reminder: your book is due on Friday', previa: 'Just a reminder that the book you borrowed is due back on Friday...',
-      corpo: '<p>Hello!</p><p>Just a reminder that the book you borrowed is due back on Friday. You can return it at the library desk.</p>' +
-        '<p><span data-s="2">There is nothing to click and nothing to pay.</span> <span data-s="3">Questions? Come and see us in the library.</span></p><p>The Library Team</p>',
-      sinais: ['The school\'s own address, spelled correctly: stnicholas.com.br.',
-        'It only informs you: no password, code, link or payment.',
-        'For questions, it sends you to a place you already know.'],
-      licao: 'Real emails exist: the difference is that they do not ask for anything risky.'
-    },
-    {
-      id: 'senha', golpe: true, de: 'Account Security', end: 'no-reply@account-security-alerts.com', sEnd: 1, cor: '#0f6cbd', hora: '09:10',
-      assunto: 'Your school account will be closed today', previa: 'We noticed unusual activity. Your account will be closed in 2 hours...',
-      corpo: '<p><b>Security alert</b></p>' +
-        '<p><span data-s="3">We noticed unusual activity. Your school account will be closed in 2 hours.</span></p>' +
-        '<p>To keep your email and Classroom, <span data-s="4">confirm your current password</span> using the button below.</p>' +
-        '<p><a class="botao-email" data-s="2" data-href="https://accounts.google.com.secure-login.net/keep">Keep my account</a></p>' +
-        '<p style="color:#777;font-size:12px">Account Security Team</p>',
-      sinais: ['The sender is not the school or Google: account-security-alerts.com could be anyone.',
-        'Hover over the button: the address ends in <b>secure-login.net</b>. What counts is the domain just before the first "/".',
-        'Pressure: "closed in 2 hours".',
-        'It asks for your password. No real service asks for your password by email.'],
-      licao: 'Be suspicious of any email that asks you to "confirm" your password.'
+      id: 'alerta-real', golpe: false, de: 'Google', end: 'no-reply@accounts.google.com', sEnd: 1, cor: '#1a73e8', hora: '09:33',
+      assunto: 'New sign-in on Chromebook', previa: 'You signed in on a new Chromebook. If this was you, you don\'t need to do anything...',
+      corpo: '<div class="gm-cartao"><p class="gm-cartao-t">A new sign-in on Chromebook</p><p>you@stnicholas.com.br</p>' +
+        '<p>Your school account was used to sign in on a Chromebook (Library, São Paulo) at 08:07. <span data-s="2">If this was you, you don\'t need to do anything.</span></p>' +
+        '<p><span data-s="3">If it wasn\'t you, go to your account settings yourself and change your password.</span></p></div>',
+      sinais: ['The real Google domain, letter by letter: <b>accounts.google.com</b>.',
+        'You did sign in on a library Chromebook just after 08:00: it matches what you did.',
+        'It does not push you to click a button. It tells you to go to your settings yourself.'],
+      licao: 'Real alerts exist. The difference: they match something you did, and you can check without their link.'
     },
     {
       id: 'professor', golpe: true, de: 'Head of Grade 8', end: 'head.grade8@stnicho1as.com.br',
-      endHtml: 'head.grade8@<span data-s="1">stnicho1as</span>.com.br', cor: '#5b3a28', hora: '09:02',
-      assunto: 'Quick favour, please keep it secret', previa: 'I need your help with a surprise for the class today...',
-      corpo: '<p>Hi,</p><p>I need your help with a surprise prize for the class <span data-s="2">today</span>. <span data-s="2">Please don\'t tell anyone, it\'s a secret.</span></p>' +
-        '<p><span data-s="3">I\'m in meetings all day, so just reply here.</span></p>' +
-        '<p><span data-s="4">Can you buy 3 gift cards of R$ 100 at the shop and send me the codes?</span> I\'ll pay you back tomorrow.</p><p>Thanks!</p>',
-      sinais: ['A swapped letter: stnicho<b>1</b>as, with the number "1" instead of the letter "l".',
-        'Rush and secrecy: the favourite pair of every impersonation scam.',
-        '"Just reply here" stops you checking with the real teacher.',
-        'Gift card codes are like cash. No teacher will ever ask you to buy them.'],
-      licao: 'A strange request from a teacher? Ask them in person.'
+      endHtml: 'head.grade8@<span data-s="1">stnicho1as</span>.com.br', cor: '#5b3a28', hora: '09:20',
+      assunto: 'Could you help me with something this morning?', previa: 'Are you at school already? I need a hand with the class surprise...',
+      corpo: '<p>Good morning,</p><p>Are you at school already? I\'m organising a surprise for the end of term and I\'d like your help, <span data-s="2">but please don\'t mention it in class so it stays a surprise.</span></p>' +
+        '<p><span data-s="3">I\'m in meetings until lunch, so email is best.</span> Could you buy two R$ 100 game gift cards on the way home and <span data-s="4">send me a photo of the codes on the back</span>? I\'ll pay you back tomorrow.</p><p>Many thanks,<br>Head of Grade 8</p>',
+      sinais: ['A number instead of a letter: stnicho<b>1</b>as, with "1" instead of "l". Easy to miss on a small screen.',
+        'Asking you to keep it quiet stops you checking with anyone.',
+        '"Email is best" means you cannot just ask them in person or by phone.',
+        'Gift card codes are like cash. No teacher will ever ask you to buy them or send the codes.'],
+      licao: 'An odd request from a teacher? Ask them face to face. A real teacher will never mind.'
     },
     {
-      id: 'conselho', golpe: false, de: 'Student Council', end: 'studentcouncil@stnicholas.com.br', sEnd: 1, cor: '#3e9b2f', hora: '08:55',
+      id: 'biblioteca', golpe: false, de: 'Library', end: 'library@stnicholas.com.br', sEnd: 1, cor: '#002664', hora: '09:02',
+      assunto: 'Your book is overdue', previa: 'The book you borrowed was due back yesterday. Please return it...',
+      corpo: '<p>Hello,</p><p>The book you borrowed was due back yesterday. Please return it to the library desk this week.</p>' +
+        '<p><span data-s="2">There is no fine and nothing to pay.</span> <span data-s="3">If you think this is a mistake, come and see us at break.</span></p><p>The Library Team</p>',
+      sinais: ['The school\'s own address, spelled correctly: <b>stnicholas.com.br</b>.',
+        'It does not ask for money, a password or a click.',
+        'For questions, it sends you to a real place you already know.'],
+      licao: 'A message can sound strict and still be real: it asks for nothing risky.'
+    },
+    {
+      id: 'drive', golpe: true, de: 'Science Department (via Docs)', end: 'drive-shares-noreply@docs-share-google.com', sEnd: 1, cor: '#188038', hora: '08:52',
+      assunto: 'Shared with you: "Grade 8 Science test results.xlsx"', previa: 'Science Department shared a spreadsheet with you...',
+      corpo: '<div class="gm-cartao"><p><b>Science Department</b> shared a spreadsheet with you</p>' +
+        '<div class="gm-arquivo">' + '<span class="gm-xls">XLS</span>Grade 8 Science test results.xlsx</div>' +
+        '<p><span data-s="3">Results are visible until 17:00 today.</span></p>' +
+        '<p><a class="gm-botao" data-s="2" data-href="https://docs.google.com.file-viewer.app/d/8sci-results">Open</a></p>' +
+        '<p class="gm-mini"><span data-s="4">You will need to sign in again with your school password to view this file.</span></p></div>',
+      sinais: ['Real share emails come from <b>google.com</b>. This one comes from <b>docs-share-google.com</b>.',
+        'Hover over Open: the domain is <b>file-viewer.app</b>, not docs.google.com.',
+        '"Until 17:00 today": a deadline so you hurry.',
+        'Asking you to type your password again to "view" a file is how passwords get stolen.'],
+      licao: 'Something you really want to see, like marks, is the perfect bait. Grades live in ManageBac: open it yourself.'
+    },
+    {
+      id: 'managebac', golpe: false, de: 'ManageBac', end: 'notifications@managebac.com', sEnd: 1, cor: '#e8710a', hora: '08:40',
+      assunto: 'Your ManageBac password was changed', previa: 'The password for your account was changed today at 08:31...',
+      corpo: '<p>Hi,</p><p>The password for your ManageBac account was changed today at 08:31.</p>' +
+        '<p><span data-s="2">If you made this change, you can ignore this email.</span></p>' +
+        '<p><span data-s="3">If you did not, tell your form tutor or the IT team at school straight away.</span></p><p>ManageBac</p>',
+      sinais: ['From ManageBac\'s own domain: <b>managebac.com</b>.',
+        'You changed your ManageBac password in tutor time, at 08:30: it matches what you did.',
+        'If something is wrong, it sends you to real people at school, not to a link.'],
+      licao: 'A real "your password changed" email only tells you. It never asks you to type the password into it.'
+    },
+    {
+      id: 'conselho', golpe: false, de: 'Student Council', end: 'studentcouncil@stnicholas.com.br', sEnd: 1, cor: '#3e9b2f', hora: '08:31',
       assunto: 'Election results are on the Student Portal', previa: 'The results of the Student Council election are now on the portal...',
       corpo: '<p>Hi everyone!</p><p>The results of the Student Council election are now on the Student Portal. Thank you to everyone who voted!</p>' +
         '<p><span data-s="2">No need to sign in anywhere new: open the portal the way you always do.</span></p><p><span data-s="3">See you at assembly,</span><br>Student Council</p>',
@@ -65,77 +87,81 @@
       licao: 'Checked and all fine? Carry on with your day.'
     },
     {
-      id: 'sorteio', golpe: true, de: 'Prize Draw', end: 'prizes@stnicholas-giveaway.com', sEnd: 1, cor: '#3c6ea8', hora: '08:41',
-      assunto: 'St. Nicholas students: win new headphones', previa: 'Every St. Nicholas student can enter our prize draw for free headphones...',
-      corpo: '<p>Hi!</p><p><span data-s="2">Every St. Nicholas student can enter our draw for free wireless headphones.</span></p>' +
-        '<p>To enter:</p><ol><li>Open the form below</li><li><span data-s="3">Type your school email, password and date of birth</span></li><li>Share this email with 5 friends</li></ol>' +
-        '<p><a data-href="https://stnicholas-giveaway.com/enter">stnicholas-giveaway.com/enter</a></p>' +
-        '<p><span data-s="4">Only the first 50 students get a chance!</span></p>',
-      sinais: ['It uses the school\'s name, but the domain is <b>stnicholas-giveaway.com</b>, not the school\'s.',
-        'A prize you never entered.',
-        'It asks for your password and date of birth: that is enough to take over your account.',
-        '"First 50 only" is there to make you hurry.'],
-      licao: 'The school\'s name in an email does not make it the school. Check the domain.'
+      id: 'rifa', golpe: true, de: 'St. Nicholas Events', end: 'events@stnicholas.org.br', sEnd: 1, cor: '#3c6ea8', hora: '08:15',
+      assunto: 'Winter Fair raffle: confirm your entry', previa: 'Thank you for entering the Winter Fair raffle! Please confirm your entry...',
+      corpo: '<p>Dear student,</p><p>Thank you for entering the Winter Fair raffle! <span data-s="2">To keep your ticket, please confirm your entry with your school account.</span></p>' +
+        '<p><a data-s="3" data-href="https://stnicholas.org.br/raffle/confirm">stnicholas.org.br/raffle/confirm</a></p>' +
+        '<p><span data-s="4">Unconfirmed tickets are cancelled on Friday.</span></p><p>Events Team</p>',
+      sinais: ['The school is <b>stnicholas.com.br</b>. This is <b>.org.br</b>: one small change, a different owner.',
+        'You never entered a raffle. Something you "already did" makes it feel familiar.',
+        'The link looks like the school\'s name, but it is the same fake .org.br domain.',
+        'A deadline to make you act before you think.'],
+      licao: 'Check the whole domain, ending included: .com.br and .org.br are different places.'
     }
   ];
 
-  function iniciais(n) { return n.replace(/[^A-Za-zÀ-ú ]/g, '').split(' ').filter(Boolean).slice(0, 2).map(p => p[0]).join('').toUpperCase(); }
+  const TOTAL_GOLPES = EMAILS.filter(e => e.golpe).length;
+  function iniciais(n) { return n.replace(/\(.*\)/, '').replace(/[^A-Za-zÀ-ú ]/g, '').split(' ').filter(Boolean).slice(0, 2).map(p => p[0]).join('').toUpperCase(); }
 
   M.registrar({
-    ordem: 2, id: 'caixa', hora: '09:00', titulo: 'Your inbox', tema: 'Phishing in the age of AI', icone: 'email', max: 60,
-    missao: 'Six emails arrived this morning. Some are scams written by AI, <strong>with no spelling mistakes at all</strong>. Open each one and decide: <strong>Report</strong> or <strong>It is real</strong>.',
+    ordem: 2, id: 'caixa', hora: '09:00', titulo: 'Your inbox', tema: 'Phishing in the age of AI', icone: 'email', max: 80,
+    missao: 'This morning you signed in on a library Chromebook, and in tutor time you changed your ManageBac password. Now eight emails are waiting. Some are scams written by AI: <strong>no spelling mistakes, real names</strong>. Open each one and decide: <strong>Report phishing</strong> or <strong>Looks safe</strong>.',
     como: [
-      ['lupa', 'Check the sender\'s address, letter by letter.'],
+      ['lupa', 'Open each email and check the full address, letter by letter, ending included.'],
       ['clique', 'Hover over links and buttons: the real address appears at the bottom.'],
       ['reportar', 'If in doubt, report it. Reporting a real email still gets half the points; letting a scam through gets nothing.']
     ],
     licoes: [
-      'Today\'s scams are well written and use names you know: check the sender\'s <b>domain</b> letter by letter.',
+      'Scams copy real emails almost perfectly. Check the <b>domain</b>: a "1" for an "l", an extra word, .org.br for .com.br.',
       'Hover before you click: what counts is the domain just before the first "/".',
-      'Nobody real asks for your password, a code or gift cards by email.',
-      'Not sure? Do not click. Report it, and show a teacher or a parent.'
+      'Nobody real asks for your password, a code or gift cards by email, not even to "view a file".',
+      'A scary alert? Never use its button. Open the site yourself, the way you always do.'
     ],
-    conquista: { id: 'cacador', nome: 'Phishing hunter', desc: 'Got all 6 emails right', icone: 'email' },
+    conquista: { id: 'cacador', nome: 'Phishing hunter', desc: 'Got all 8 emails right', icone: 'email' },
 
     iniciar(api) {
       const decid = {};
       let atual = null;
       api.raiz.innerHTML =
-        '<div class="ol"><div class="ol-topo"><div class="app">' + ico('email') + 'School Mail</div><div class="busca">' + ico('lupa') + 'Search</div><div class="prog">Sorted: <b>0</b> of 6</div></div>' +
-        '<div class="ol-corpo"><nav class="ol-pastas"><div class="sel">Inbox <span class="nl">6</span></div><div>Spam</div><div>Drafts</div><div>Sent</div><div>Bin</div><div>Archive</div></nav>' +
-        '<div class="ol-lista"><div class="cab">Inbox <span>Newest</span></div>' +
-        EMAILS.map(e => '<div class="ol-item nlido" data-id="' + e.id + '" tabindex="0" role="button"><span class="av" style="background:' + e.cor + '">' + iniciais(e.de) + '</span>' +
-          '<div class="meio"><div class="de"><b>' + e.de + '</b><small>' + e.hora + '</small></div><div class="ass">' + e.assunto + '</div><div class="prev">' + e.previa + '</div></div></div>').join('') +
-        '</div><section class="ol-ler"><div class="ol-vazio"><div>' + ARTE.ico('email') + '<div>Open an email from the list to start.</div></div></div></section></div></div>';
-      const ler = api.raiz.querySelector('.ol-ler');
-      const lista = api.raiz.querySelector('.ol-lista');
-      api.toast('Check the sender and hover over the links before you decide.', '', 'lupa');
+        '<div class="gm"><div class="gm-topo"><span class="gm-menu">' + ico('menu') + '</span><div class="gm-marca">' + ico('email') + 'School Mail</div>' +
+        '<div class="gm-busca">' + ico('lupa') + 'Search mail</div><div class="prog">Sorted: <b>0</b> of ' + EMAILS.length + '</div></div>' +
+        '<div class="gm-corpo"><nav class="gm-pastas"><div class="gm-escrever">' + ico('nota') + 'Compose</div>' +
+        '<div class="sel">' + ico('email') + 'Inbox <span class="nl">' + EMAILS.length + '</span></div><div>' + ico('estrela') + 'Starred</div><div>' + ico('relogio') + 'Snoozed</div>' +
+        '<div>' + ico('enviar') + 'Sent</div><div>' + ico('alerta') + 'Spam</div></nav>' +
+        '<div class="gm-lista">' +
+        EMAILS.map(e => '<div class="gm-item nlido" data-id="' + e.id + '" tabindex="0" role="button"><span class="gm-chk"></span>' +
+          '<span class="gm-de">' + e.de + '</span><span class="gm-ass"><b>' + e.assunto + '</b> - ' + e.previa + '</span><span class="gm-hora">' + e.hora + '</span></div>').join('') +
+        '</div><section class="gm-ler"></section></div></div>';
+      const gm = api.raiz.querySelector('.gm');
+      const ler = gm.querySelector('.gm-ler');
+      const lista = gm.querySelector('.gm-lista');
+      api.toast('Open each email and check the full sender address before you decide.', '', 'lupa');
 
-      lista.addEventListener('click', e => { const it = e.target.closest('.ol-item'); if (it) abrir(it.dataset.id); });
-      lista.addEventListener('keydown', e => { if (e.key === 'Enter') { const it = e.target.closest('.ol-item'); if (it) abrir(it.dataset.id); } });
+      lista.addEventListener('click', e => { const it = e.target.closest('.gm-item'); if (it) abrir(it.dataset.id); });
+      lista.addEventListener('keydown', e => { if (e.key === 'Enter') { const it = e.target.closest('.gm-item'); if (it) abrir(it.dataset.id); } });
+
+      function voltar() { atual = null; gm.classList.remove('lendo'); }
 
       function abrir(id) {
         const e = EMAILS.find(x => x.id === id);
         atual = e;
         api.som('clique');
-        lista.querySelectorAll('.ol-item').forEach(it => it.classList.toggle('sel', it.dataset.id === id));
-        const item = lista.querySelector('[data-id="' + id + '"]');
-        item.classList.remove('nlido');
-        const nl = api.raiz.querySelector('.ol-pastas .nl');
-        nl.textContent = lista.querySelectorAll('.ol-item.nlido').length || '';
+        lista.querySelector('[data-id="' + id + '"]').classList.remove('nlido');
+        gm.querySelector('.gm-pastas .nl').textContent = lista.querySelectorAll('.gm-item.nlido').length || '';
+        gm.classList.add('lendo');
         const feito = decid[id];
         ler.innerHTML =
-          '<div class="ol-barra"><span class="lbl">This email is:</span>' +
-          '<button class="btn-ol rep" data-d="1" type="button"' + (feito ? ' disabled' : '') + '>' + ico('reportar') + 'Report</button>' +
-          '<button class="btn-ol leg" data-d="0" type="button"' + (feito ? ' disabled' : '') + '>' + ico('check') + 'It is real</button></div>' +
+          '<div class="gm-barra"><button class="gm-volta" type="button" aria-label="Back to inbox">' + ico('seta') + '</button><span class="lbl">This email is:</span>' +
+          '<button class="btn-ol rep" data-d="1" type="button"' + (feito ? ' disabled' : '') + '>' + ico('reportar') + 'Report phishing</button>' +
+          '<button class="btn-ol leg" data-d="0" type="button"' + (feito ? ' disabled' : '') + '>' + ico('check') + 'Looks safe</button></div>' +
           '<div class="vered-slot"></div>' +
-          '<div class="ol-msg' + (feito ? ' mostra-sinais' + (e.golpe ? '' : ' legit') : '') + '"><h2>' + e.assunto + '</h2>' +
-          '<div class="ol-rem"><span class="av" style="background:' + e.cor + '">' + iniciais(e.de) + '</span><div><div class="nome">' + e.de + '</div>' +
-          '<div class="end">&lt;' + (e.endHtml || (e.sEnd ? '<span data-s="' + e.sEnd + '">' + e.end + '</span>' : e.end)) + '&gt;</div><div class="para">To: you</div></div>' +
-          '<div class="hora">Today, ' + e.hora + '</div></div>' +
-          (e.anexos ? '<div>' + e.anexos.map(a => '<span class="anexo"' + (a.s ? ' data-s="' + a.s + '"' : '') + '><span class="tp" style="background:' + a.cor + '">' + a.tipo + '</span><span>' + a.nome + '<small>' + a.tam + '</small></span></span>').join('') + '</div>' : '') +
-          '<div class="ol-corpo-msg">' + e.corpo + '</div></div><div class="ol-status"></div>';
+          '<div class="gm-msg' + (feito ? ' mostra-sinais' + (e.golpe ? '' : ' legit') : '') + '"><h2>' + e.assunto + '<span class="gm-tag">Inbox</span></h2>' +
+          '<div class="gm-rem"><span class="av" style="background:' + e.cor + '">' + iniciais(e.de) + '</span><div><div class="nome"><b>' + e.de + '</b> ' +
+          '<span class="end">&lt;' + (e.endHtml || (e.sEnd ? '<span data-s="' + e.sEnd + '">' + e.end + '</span>' : e.end)) + '&gt;</span></div><div class="para">to me</div></div>' +
+          '<div class="hora">' + e.hora + ' (0 minutes ago)</div></div>' +
+          '<div class="gm-corpo-msg">' + e.corpo + '</div></div><div class="ol-status"></div>';
         if (feito) mostrarVeredito(e, feito);
+        ler.querySelector('.gm-volta').addEventListener('click', () => { api.som('clique'); voltar(); });
         ler.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => decidir(e, b.dataset.d === '1')));
         const status = ler.querySelector('.ol-status');
         ler.querySelectorAll('[data-href]').forEach(a => {
@@ -147,7 +173,6 @@
             api.toast('In real life, that click would already have opened the page. Hover to check the address <b>without clicking</b>.', '', 'alerta');
           });
         });
-        ler.querySelectorAll('.anexo').forEach(a => a.addEventListener('click', () => api.toast('Opening an unexpected attachment is how scams start. Decide before you open it.', '', 'alerta')));
       }
 
       function decidir(e, reportou) {
@@ -158,26 +183,17 @@
         decid[e.id] = res;
         const btn = ler.querySelector('[data-d="' + (reportou ? 1 : 0) + '"]');
         if (certo) api.acerto(pts, btn); else if (pts) api.parcial(pts, btn); else api.erro(btn);
-        api.registrar(e.id, reportou ? 'report' : 'real', certo, e.assunto);
         ler.querySelectorAll('[data-d]').forEach(b => { b.disabled = true; });
-        const msg = ler.querySelector('.ol-msg');
+        const msg = ler.querySelector('.gm-msg');
         msg.classList.add('mostra-sinais'); if (!e.golpe) msg.classList.add('legit');
-        const item = lista.querySelector('[data-id="' + e.id + '"]');
-        item.insertAdjacentHTML('beforeend', '<span class="status ' + res + '">' + ico(certo ? 'check' : (pts ? 'reportar' : 'x')) + '</span>');
-        api.raiz.querySelector('.ol-topo .prog b').textContent = Object.keys(decid).length;
+        lista.querySelector('[data-id="' + e.id + '"]').insertAdjacentHTML('beforeend', '<span class="status ' + res + '">' + ico(certo ? 'check' : (pts ? 'reportar' : 'x')) + '</span>');
+        gm.querySelector('.gm-topo .prog b').textContent = Object.keys(decid).length;
         mostrarVeredito(e, res);
-        if (todosDecididos()) {
-          // atalho extra no topo, para quem não usar o botão do veredito
-          const prog = api.raiz.querySelector('.ol-topo .prog');
-          prog.innerHTML = '<button class="btn peq" type="button" style="padding:6px 14px;font-size:13px">Finish sorting' + ico('seta') + '</button>';
-          prog.style.background = 'none'; prog.style.padding = '0';
-          prog.querySelector('button').addEventListener('click', concluir);
-        }
       }
       function todosDecididos() { return Object.keys(decid).length === EMAILS.length; }
 
       function mostrarVeredito(e, res) {
-        const tit = res === 'certo' ? (e.golpe ? 'Scam spotted!' : 'That\'s right: it is real.')
+        const tit = res === 'certo' ? (e.golpe ? 'Scam spotted!' : 'That\'s right: it is safe.')
           : res === 'meio' ? 'It was real, but reporting when in doubt is not a big mistake.' : 'That was a scam!';
         const pts = res === 'certo' ? '+10' : res === 'meio' ? '+5' : '+0';
         const fim = todosDecididos();
@@ -188,14 +204,12 @@
           '<div class="licao">' + e.licao + '</div></div>' +
           '<button class="btn peq" type="button">' + (fim ? 'Finish' : 'Next email') + ico('seta') + '</button></div>';
         const b = slot.querySelector('button');
-        if (b) {
-          setTimeout(() => b.focus(), 80);
-          b.addEventListener('click', () => {
-            if (todosDecididos()) return concluir();
-            const prox = EMAILS.find(x => !decid[x.id]);
-            if (prox) abrir(prox.id);
-          });
-        }
+        setTimeout(() => b.focus(), 80);
+        b.addEventListener('click', () => {
+          if (todosDecididos()) return concluir();
+          const prox = EMAILS.find(x => !decid[x.id]);
+          if (prox) abrir(prox.id);
+        });
       }
 
       let concluindo = false;
@@ -204,8 +218,8 @@
         concluindo = true;
         const certos = Object.values(decid).filter(v => v === 'certo').length;
         await api.feedback({
-          tipo: certos === 6 ? 'ok' : 'info', titulo: certos === 6 ? 'Inbox protected!' : 'You got ' + certos + ' of 6',
-          texto: '<p>Four of these emails were scams, and none had a spelling mistake. With AI, scams look like everyday messages. What gives them away is the <b>domain</b>, the <b>request</b> (password, code, gift cards, a prize) and the <b>rush</b>.</p>',
+          tipo: certos === EMAILS.length ? 'ok' : 'info', titulo: certos === EMAILS.length ? 'Inbox protected!' : 'You got ' + certos + ' of ' + EMAILS.length,
+          texto: '<p>' + TOTAL_GOLPES + ' of these emails were scams, and none had a spelling mistake. With AI, a scam can look exactly like a real email. What gives it away is the <b>domain</b>, the <b>request</b> (password, code, gift cards) and the <b>rush</b>.</p>',
           botao: 'See your result'
         });
         api.fim();
@@ -214,7 +228,8 @@
       api.teclas(e => {
         if (!atual || decid[atual.id] || e.target.closest && e.target.closest('button')) return;
         if (e.key === 'r' || e.key === 'R') decidir(atual, true);
-        if (e.key === 'l' || e.key === 'L') decidir(atual, false);
+        if (e.key === 's' || e.key === 'S') decidir(atual, false);
+        if (e.key === 'Escape') voltar();
       });
     }
   });

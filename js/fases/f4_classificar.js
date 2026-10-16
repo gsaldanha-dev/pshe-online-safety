@@ -9,19 +9,22 @@
     conf: { nome: 'Never share', icone: 'cadeado', def: 'Not online, not even with your best friend.' }
   };
   const CARTAS = [
-    { t: 'Your school account password', n: 'conf', ic: 'chave', ex: 'A password shared is a password lost. Not even best friends need it.' },
+    { t: 'A photo of you in uniform at the school gate', n: 'int', ic: 'camera', ex: 'The uniform and the gate say where you are every weekday. Fine for family, not for a public post.' },
     { t: 'Your favourite football team', n: 'pub', ic: 'estrela', ex: 'A harmless fact about you: fine to share.' },
-    { t: 'Your home address', n: 'int', ic: 'casa', ex: 'Family and close friends can know it. Never in a public post or profile.' },
-    { t: 'A drawing you made for Art (no name or face)', n: 'pub', ic: 'camera', ex: 'Your work, with nothing that identifies you: fine to share.' },
+    { t: 'The name of your first pet', n: 'conf', ic: 'chave', ex: 'It is a classic security question answer. Posted online, it helps someone reset your password.' },
+    { t: 'Your full date of birth', n: 'int', ic: 'calendario', ex: 'Day, month and year are used to check who you are. Friends can know your birthday; strangers do not need the year.' },
+    { t: 'A drawing you made for Art (no name or face)', n: 'pub', ic: 'nota', ex: 'Your work, with nothing that identifies you: fine to share.' },
     { t: 'The 6-digit code sent to your phone', n: 'conf', ic: 'celular', ex: 'Codes unlock your accounts. Whoever asks for one is trying to get in.' },
-    { t: 'Your phone number', n: 'int', ic: 'telefone', ex: 'Give it to people you know in real life, not to followers or strangers in a game.' },
+    { t: 'Your home address', n: 'int', ic: 'casa', ex: 'Family and close friends can know it. Never in a public post or profile.' },
+    { t: 'Your opinion of a film you watched', n: 'pub', ic: 'megafone', ex: 'Opinions are fine to share, as long as they are kind.' },
     { t: 'Your live location', n: 'int', ic: 'globo', ex: 'Share it only with family. Switch it off for everyone else.' },
-    { t: 'Your parents\' bank card numbers', n: 'conf', ic: 'dinheiro', ex: 'Never type or send these. Ask an adult to make any payment.' },
-    { t: 'Photos from a sleepover', n: 'int', ic: 'pessoas', ex: 'Only with the people who were there, and only if everyone in the photo says yes.' }
+    { t: 'Your school account password', n: 'conf', ic: 'cadeado', ex: 'A password shared is a password lost. Not even best friends need it.' },
+    { t: 'Your phone number', n: 'int', ic: 'telefone', ex: 'Give it to people you know in real life, not to followers or strangers in a game.' },
+    { t: 'Your parents\' bank card numbers', n: 'conf', ic: 'dinheiro', ex: 'Never type or send these. Ask an adult to make any payment.' }
   ];
 
   M.registrar({
-    ordem: 4, id: 'classificar', hora: '11:30', titulo: 'Who can see it?', tema: 'Personal information', icone: 'pasta', max: 90,
+    ordem: 4, id: 'classificar', hora: '11:30', titulo: 'Who can see it?', tema: 'Personal information', icone: 'pasta', max: 120,
     missao: 'In PSHE, your class is making a poster about privacy. <strong>Sort each piece of information</strong>: Anyone, People I trust or Never share.',
     como: [
       ['arrastar', 'Drag the card to the right box.'],
@@ -31,9 +34,9 @@
     licoes: [
       '<b>Anyone</b>: things that cannot be used to find you or get into your accounts, like your favourite team or your artwork.',
       '<b>People I trust</b>: your address, phone number, location and private photos, only with family and friends you know in real life.',
-      '<b>Never share</b>: passwords, codes and bank details. If in doubt, choose the safer box and ask an adult.'
+      '<b>Never share</b>: passwords, codes, bank details, and anything that answers a security question (like your first pet). If in doubt, choose the safer box and ask an adult.'
     ],
-    conquista: { id: 'guardiao', nome: 'Privacy keeper', desc: 'Sorted all 9 cards without a mistake', icone: 'pasta' },
+    conquista: { id: 'guardiao', nome: 'Privacy keeper', desc: 'Sorted all 12 cards without a mistake', icone: 'pasta' },
 
     iniciar(api) {
       let i = 0, ocupado = false;

@@ -4,8 +4,8 @@ M.registrar({
   missao: 'You arrive early and pass a classmate\'s desk. They have gone to get a book. <strong>Find the 6 risks</strong> on show before someone else does.',
   como: [
     ['clique', 'Click the things in the scene that put someone\'s information at risk.'],
-    ['alerta', 'Careful: clicking something that is not a risk costs <b>2 points</b>.'],
-    ['lampada', 'Stuck? After a few seconds, a hint lights up.']
+    ['alerta', 'Careful: clicking something that is not a risk costs <b>3 points</b>.'],
+    ['lampada', 'Stuck for a while? A hint lights up.']
   ],
   licoes: [
     'Leaving your laptop? Lock the screen first: <b>Windows + L</b>, <b>Ctrl + Cmd + Q</b> on a Mac, or <b>Search + L</b> on a Chromebook.',
